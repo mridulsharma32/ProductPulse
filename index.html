@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ProductPulse</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="topbar">
+        <div>
+          <p class="eyebrow">AI Product Feedback MVP</p>
+          <h1>ProductPulse</h1>
+        </div>
+        <div class="actions">
+          <a class="ghost-button" href="sample_feedback.csv">Sample CSV</a>
+          <button id="resetButton" class="icon-button" title="Reset demo data">Reset</button>
+        </div>
+      </section>
+
+      <section class="metrics" aria-label="Dashboard metrics">
+        <article>
+          <span>Total Feedback</span>
+          <strong id="totalFeedback">0</strong>
+        </article>
+        <article>
+          <span>Average RICE</span>
+          <strong id="avgRice">0</strong>
+        </article>
+        <article>
+          <span>High Urgency</span>
+          <strong id="highUrgency">0</strong>
+        </article>
+        <article>
+          <span>Negative Items</span>
+          <strong id="negativeItems">0</strong>
+        </article>
+      </section>
+
+      <section class="workspace">
+        <form id="feedbackForm" class="panel">
+          <div class="panel-heading">
+            <h2>Add Feedback</h2>
+            <span>Auto-classified on save</span>
+          </div>
+          <label>
+            Customer
+            <input id="customerInput" name="customer" placeholder="Customer name" />
+          </label>
+          <label>
+            Feedback
+            <textarea id="contentInput" name="content" rows="5" placeholder="Paste user feedback here"></textarea>
+          </label>
+          <button type="submit" class="primary-button">Analyze Feedback</button>
+        </form>
+
+        <div class="panel">
+          <div class="panel-heading">
+            <h2>CSV Upload</h2>
+            <span>Columns: customer, content</span>
+          </div>
+          <input id="csvInput" type="file" accept=".csv" />
+          <p class="hint">Upload customer feedback in bulk. The app will score every row automatically.</p>
+        </div>
+      </section>
+
+      <section class="grid-two">
+        <div class="panel">
+          <div class="panel-heading">
+            <h2>Sentiment</h2>
+            <span>Current mix</span>
+          </div>
+          <div id="sentimentChart" class="bar-list"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-heading">
+            <h2>Categories</h2>
+            <span>Feedback themes</span>
+          </div>
+          <div id="categoryChart" class="bar-list"></div>
+        </div>
+      </section>
+
+      <section class="grid-two">
+        <div class="panel">
+          <div class="panel-heading">
+            <h2>Top Pain Points</h2>
+            <span>Repeated phrases</span>
+          </div>
+          <div id="painPoints" class="pain-list"></div>
+        </div>
+        <div class="panel prd-panel">
+          <div class="panel-heading">
+            <h2>Generated PRD</h2>
+            <span>Based on top RICE item</span>
+          </div>
+          <pre id="prdOutput"></pre>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <h2>Prioritized Feedback</h2>
+          <span>Sorted by RICE score</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Customer</th>
+                <th>Feedback</th>
+                <th>Category</th>
+                <th>Sentiment</th>
+                <th>Urgency</th>
+                <th>RICE</th>
+              </tr>
+            </thead>
+            <tbody id="feedbackTable"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+    <div id="toast" role="status"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
